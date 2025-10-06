@@ -7,13 +7,20 @@ from PyQt5.QtWidgets import QPushButton, QVBoxLayout, QApplication, QWidget
 from picamera2.previews.qt import QGlPicamera2
 from picamera2 import Picamera2
 
+from datetime import datetime
+
+
 picam2 = Picamera2()
+picam2.options["compress_level"] = 0 # Don't do any compression on png file
 picam2.configure(picam2.create_preview_configuration())
 
 def on_button_clicked():
   button.setEnabled(False)
   cfg = picam2.create_still_configuration()
-  picam2.switch_mode_and_capture_file(cfg, "Images/test.jpg", 
+  current_date_time = datetime.now()
+  formatted_time = current_date_time.strftime("%Y-%m-%d-%H-%M-%S")
+  file_path = f"Images/Image-{formatted_time}.png"
+  picam2.switch_mode_and_capture_file(cfg, file_path, 
         signal_function=qpicamera2.signal_done)
 
 def capture_done(job):
