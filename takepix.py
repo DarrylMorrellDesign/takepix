@@ -9,7 +9,6 @@ from picamera2 import Picamera2
 
 from datetime import datetime
 
-
 picam2 = Picamera2()
 picam2.options["compress_level"] = 0 # Don't do any compression on png file
 picam2.configure(picam2.create_preview_configuration())
@@ -25,12 +24,11 @@ def on_button_clicked():
 
 def capture_done(job):
   result = picam2.wait(job)
-  
   button.setEnabled(True)
 
 app = QApplication([])
 qpicamera2 = QGlPicamera2(picam2, width=800, height=600, keep_ar=False)
-button = QPushButton("Click to capture JPEG")
+button = QPushButton("Click to capture Image")
 window = QWidget()
 qpicamera2.done_signal.connect(capture_done)
 button.clicked.connect(on_button_clicked)
