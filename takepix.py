@@ -18,7 +18,7 @@ def on_button_clicked():
   cfg = picam2.create_still_configuration()
   current_date_time = datetime.now()
   formatted_time = current_date_time.strftime("%Y-%m-%d-%H-%M-%S")
-  file_path = f"/home/hilo/Hilo/takepix/Images/Image-{formatted_time}.png"
+  file_path = f"/home/hilo/Hilo/proto-images/Image-{formatted_time}.png"
   picam2.switch_mode_and_capture_file(cfg, file_path, 
         signal_function=qpicamera2.signal_done)
 
