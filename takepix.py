@@ -8,10 +8,15 @@ from picamera2.previews.qt import QGlPicamera2
 from picamera2 import Picamera2
 
 from datetime import datetime
+import pprint
 
 picam2 = Picamera2()
+pprint.pprint(picam2.sensor_modes)
+
 picam2.options["compress_level"] = 0 # Don't do any compression on png file
-picam2.configure(picam2.create_preview_configuration())
+config = picam2.create_preview_configuration(sensor={'output_size': (2304, 1296), 'bit_depth': 10})
+
+picam2.configure(config)
 
 def on_button_clicked():
   button.setEnabled(False)
