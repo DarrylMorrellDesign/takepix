@@ -13,23 +13,29 @@ import pprint
 picam2 = Picamera2()
 pprint.pprint(picam2.sensor_modes)
 
-picam2.options["compress_level"] = 0 # Don't do any compression on png file
-config = picam2.create_preview_configuration(sensor={'output_size': (2304, 1296), 'bit_depth': 10})
+picam2.options["compress_level"] = 0  # Don't do any compression on png file
+config = picam2.create_preview_configuration(
+    sensor={"output_size": (2304, 1296), "bit_depth": 10}
+)
 
 picam2.configure(config)
 
+
 def on_button_clicked():
-  button.setEnabled(False)
-  cfg = picam2.create_still_configuration()
-  current_date_time = datetime.now()
-  formatted_time = current_date_time.strftime("%Y-%m-%d-%H-%M-%S")
-  file_path = f"/home/hilo/Hilo/proto-images/Image-{formatted_time}.png"
-  picam2.switch_mode_and_capture_file(cfg, file_path, 
-        signal_function=qpicamera2.signal_done)
+    button.setEnabled(False)
+    cfg = picam2.create_still_configuration()
+    current_date_time = datetime.now()
+    formatted_time = current_date_time.strftime("%Y-%m-%d-%H-%M-%S")
+    file_path = f"/home/hilo/Hilo/proto-images/Image-{formatted_time}.png"
+    picam2.switch_mode_and_capture_file(
+        cfg, file_path, signal_function=qpicamera2.signal_done
+    )
+
 
 def capture_done(job):
-  result = picam2.wait(job)
-  button.setEnabled(True)
+    result = picam2.wait(job)
+    button.setEnabled(True)
+
 
 app = QApplication([])
 qpicamera2 = QGlPicamera2(picam2, width=800, height=600, keep_ar=False)
