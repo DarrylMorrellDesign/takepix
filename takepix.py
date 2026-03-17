@@ -15,7 +15,8 @@ pprint.pprint(picam2.sensor_modes)
 
 picam2.options["compress_level"] = 0  # Don't do any compression on png file
 config = picam2.create_preview_configuration(
-    sensor={"output_size": (2304, 1296), "bit_depth": 10}
+    sensor={"output_size": (3280, 2464), "bit_depth": 10} #for Pi camera V2
+    # sensor={"output_size": (2304, 1296), "bit_depth": 10} #for Pi camera V3
 )
 
 picam2.configure(config)
